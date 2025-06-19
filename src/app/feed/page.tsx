@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 
 const photos = [
@@ -46,7 +47,7 @@ export default function FeedPage() {
         {photos.map((photo) => (
           <Link key={photo.id} href={`/feed/photo/${photo.id}`}>
             <div className="photo-card">
-              <img src={photo.url} alt={photo.title} className="photo-image" />
+              <Image src={photo.url} alt={photo.title} className="photo-image" />
               <div className="photo-info">
                 <h3 style={{ margin: "0 0 8px 0", fontSize: "16px" }}>
                   {photo.title}

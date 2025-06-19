@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useCallback } from "react";
 
@@ -83,7 +84,7 @@ export default function PhotoModal({ params }: { params: { id: string } }) {
           ×
         </button>
         <div style={{ padding: "24px" }}>
-          <img
+          <Image
             src={photo.url}
             alt={photo.title}
             style={{

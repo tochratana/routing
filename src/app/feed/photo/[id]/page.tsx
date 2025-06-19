@@ -1,4 +1,5 @@
 // File: app/feed/photo/[id]/page.tsx
+import Image from "next/image";
 import Link from "next/link";
 
 // Mock photo data (same as other files)
@@ -42,7 +43,6 @@ const photos = [
 ];
 
 export default function PhotoPage({ params }: { params: { id: string } }) {
-  
   const photo = photos.find((p) => p.id === params.id);
 
   if (!photo) {
@@ -78,7 +78,7 @@ export default function PhotoPage({ params }: { params: { id: string } }) {
           backgroundColor: "white",
         }}
       >
-        <img
+        <Image
           src={photo.url}
           alt={photo.title}
           style={{
