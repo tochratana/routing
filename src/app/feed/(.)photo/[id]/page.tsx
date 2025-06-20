@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useEffect, useCallback } from "react";
 
-// Mock photo data (same as feed page)
 const photos = [
   {
     id: "1",
@@ -44,9 +43,11 @@ const photos = [
   },
 ];
 
-export default function PhotoModal({ params }: { params: { id: string } }) {
+export default function PhotoModal() {
   const router = useRouter();
-  const photo = photos.find((p) => p.id === params.id);
+  const params = useParams(); // ✅ use hook instead of props
+  const photoId = params.id as string;
+  const photo = photos.find((p) => p.id === photoId);
 
   const handleClose = useCallback(() => {
     router.back();
@@ -59,7 +60,6 @@ export default function PhotoModal({ params }: { params: { id: string } }) {
       }
     };
 
-    // Prevent body scroll when modal is open
     document.body.style.overflow = "hidden";
     document.addEventListener("keydown", handleEsc);
 
@@ -69,9 +69,7 @@ export default function PhotoModal({ params }: { params: { id: string } }) {
     };
   }, [handleClose]);
 
-  if (!photo) {
-    return null;
-  }
+  if (!photo) return null;
 
   return (
     <div className="modal-overlay" onClick={handleClose}>
@@ -87,6 +85,8 @@ export default function PhotoModal({ params }: { params: { id: string } }) {
           <Image
             src={photo.url}
             alt={photo.title}
+            width={800}
+            height={400}
             style={{
               width: "100%",
               height: "400px",
